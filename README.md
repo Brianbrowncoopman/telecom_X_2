@@ -72,58 +72,65 @@ A través del uso de **Pandas, Matplotlib y Seaborn**, se realizaron visualizaci
 
 ---
 
-modelo de "ML"
+##  :wrench: Modelo de Machine Learning para Predicción de Abandono (Churn)
 
-Resultados Comparativos de Modelos
+### :books: Resultados Comparativos de Modelos
+
 Tras evaluar múltiples algoritmos, los resultados en el conjunto de prueba fueron:
 
-Modelo	Accuracy	Precisión (Abandono)	Recall (Abandono)	F1-Score (Abandono)	ROC AUC
-Árbol de Decisión	0.720	0.476	0.535	0.504	0.661
-K-Vecinos Cercanos	0.704	0.463	0.714	0.562	0.769
-Regresión Logística	0.747	0.516	0.797	0.626	0.842
-Selección Final del Modelo
-Regresión Logística fue seleccionada como modelo óptimo debido a:
+| Modelo	            |Accuracy               | Precisión (Abandono)	| Recall (Abandono)	| F1-Score (Abandono) |	ROC AUC |
+|---------------------|-----------------------|-----------------------|-------------------|---------------------|---------|
+|Árbol de Decisión	  | 0.720                 |	0.476                 |	0.535             |	0.504               |	0.661   |
+|K-Vecinos Cercanos	  | 0.704                 |	0.463                 |	0.714             |	0.562               |	0.769   |
+|Regresión Logística	| 0.747                 |	0.516                 |	0.797             |	0.626               |	0.842   |
 
-Mayor equilibrio general: Mejor puntuación F1 (0.626) para la clase minoritaria (abandono)
+## Selección del Modelo
 
-Alto recall (79.7%): Capacidad para identificar correctamente la mayoría de los casos de abandono real
+###  :lock: Se seleccionó el modelo de **Regresión Logística** como óptimo debido a:
 
-Mejor AUC (0.842): Superior desempeño en la distinción entre clases en todos los umbrales
+-Mayor equilibrio general: Mejor puntuación F1 (0.626) para la clase minoritaria (abandono)
 
-Interpretabilidad: Coeficientes claros para acciones de negocio
+-Alto recall (79.7%): Capacidad para identificar correctamente la mayoría de los casos de abandono real
 
+-Mejor AUC (0.842): Superior desempeño en la distinción entre clases en todos los umbrales
 
-Interpretación del Modelo Final
-Variables más Influyentes:
-Variable	Coeficiente	Impacto en Abandono
-Tipo_contrato_Month-to-month	+1.82	Alto aumento
-Antigüedad_cliente	-1.45	Reducción importante
-Cargos_mensuales	+1.28	Aumento significativo
-Servicio_Internet_Fiber optic	+0.94	Aumento moderado
-Facturación_paperless	+0.62	Aumento moderado
-Método_pago_Electronic check	+0.58	Aumento moderado
+-Interpretabilidad: Coeficientes claros que permiten acciones de negocio específicas
 
 
+## :mag: Interpretación del Modelo Final
 
-nterpretación de coeficientes:
+### :key: Variables más Influyentes
 
-Variables positivas aumentan probabilidad de abandono
+| Variable                      |	Coeficiente |	Impacto en Abandono   |
+|-------------------------------|-------------|-----------------------|
+| Tipo_contrato_Month-to-month  |	+1.82       |	Alto aumento          |
+| Antigüedad_cliente            |	-1.45	      | Reducción importante  |
+| Cargos_mensuales              |	+1.28	      | Aumento significativo |
+| Servicio_Internet_Fiber optic |	+0.94	      | Aumento moderado      |
+| Facturación_paperless         |	+0.62	      | Aumento moderado      |
+| Método_pago_Electronic check	|  +0.58	    | Aumento moderado      |
 
-Variables negativas reducen probabilidad de abandono
+## Interpretación de coeficientes:
 
-Magnitud indica fuerza de relación
+### **Las variables con coeficiente positivo aumentan la probabilidad de abandono**
 
-Validación de Supuestos
-Multicolinealidad: VIF < 5 para todas las variables
+### Las variables con coeficiente negativo reducen la probabilidad de abandono
 
-Relación Lineal: Análisis de residuos confirmó linealidad
+### La magnitud del coeficiente indica la fuerza de la relación
 
-Outliers: Tratados con winsorization (1% en ambos extremos)
+## Validación de Supuestos
 
+Se verificaron los siguientes supuestos para el modelo de Regresión Logística:
 
+Multicolinealidad: El Factor de Inflación de la Varianza (VIF) fue menor a 5 para todas las variables, indicando ausencia de multicolinealidad crítica
 
-Análisis de Errores
-El modelo tiene mejor desempeño en:
+Relación Lineal: El análisis de residuos confirmó la linealidad en la relación entre los predictores y la variable objetivo en el espacio logit
+
+Outliers: Se trataron los valores extremos mediante la técnica de winsorization (1% en ambos extremos), reduciendo su influencia en el modelo
+
+## Análisis de Errores
+
+### El modelo presenta un mejor desempeño en los siguientes segmentos:
 
 Clientes nuevos (<6 meses)
 
@@ -131,12 +138,14 @@ Usuarios de fibra óptica
 
 Clientes con factura paperless
 
-Principales limitaciones:
+## Principales limitaciones:
 
-Dificultad para predecir abandono en clientes 6-18 meses
+### :exclamation: Dificultad para predecir abandono en clientes con antigüedad de 6-18 meses
 
-22% de falsos positivos en segmento premium
+Tasa de falsos positivos del 22% en el segmento premium (clientes con cargos mensuales altos)
 
+Plan de Mejoras
+Para futuras iteraciones del modelo se proponen las siguientes mejoras:
 ## ✅ Recomendaciones
 
 - Incentivar la migración hacia **contratos anuales o semestrales**.
